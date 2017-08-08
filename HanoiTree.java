@@ -1,28 +1,44 @@
 import java.util.*;
 public class HanoiTree{
-	class Node<E>{
-		E A,B,C;
-		Node<Stack> left,right,centre;
+   static class Node<E>{
+      E A,B,C;
+      Node<E> left,right,centre;
       
-		public Node(Stack A,E B,E C){
-			this.A = A;
+      public Node(E A, E B, E C){
+         this.A = A;
          this.B = B;
          this.C = C;
-         //B.push(2);
-			//left = new Node(A,B,C);
-         //C.push(B.pop());
-			//right = new Node(A,B,C);
          left = null;
          right = null;
          centre = null;
-         //A.push(C.pop());
-		}
-      
-	}
-   
-   public void start(){
-   
+      }
    }
+   
+   public static void children(Node<Stack<Integer>> root){
+      Stack<Integer> A = 
+      if (root.A.peek() == 1){
+         
+      }
+   }
+
+   public static void constructTree(){
+      Stack<Integer> A = new Stack<>();
+      Stack<Integer> B = new Stack<>();
+      Stack<Integer> C = new Stack<>();
+      A.push(3);
+      A.push(2);
+      A.push(1);
+      Node<Stack<Integer>> root = new Node(A.clone(),new Stack<>(),new Stack<>());
+      B.push(A.pop());
+      root.left = new Node(A.clone(),B.clone(),new Stack<>());
+      root.right = new Node(A.clone(),new Stack<>(),B.clone());
+      while (!(root.A.empty() && root.B.empty())){
+         
+      
+      }
+   }
+   
+   
    
    /*public boolean insert(List element){
       if (root == null){
@@ -31,8 +47,6 @@ public class HanoiTree{
    }*/
    
    public static void main(String[] arg){
-      Stack<Integer> Ast = new Stack<>();
-      Ast.push(3);
-      Node<Stack<Integer>> A = new Node(Ast);
+      constructTree();
    }
 }//Must return length of path from start state (root node) to goal state
