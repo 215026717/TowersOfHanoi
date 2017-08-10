@@ -13,13 +13,68 @@ public class HanoiTree{
          centre = null;
       }
    }
+   public static boolean switcher;
    
-   public static void children(Node<Stack<Integer>> root){
+   public static boolean children(Node<Stack<Integer>> root){
       Stack<Integer> A = root.A;
       Stack<Integer> B = root.B;
       Stack<Integer> C = root.C;
+      //one(root,A,B,C);
+      //two(root,A,B,C);
+      System.out.println(switcher);
+      switcher = !switcher;
       one(root,A,B,C);
-      if (A.peek() > 1){
+      two(root,A,B,C);
+      if (root.A.empty() && root.B.empty()){
+         return true;
+      }
+      else if (switcher){
+         children(root.left);
+         children(root.right);
+         children(root.centre);
+         return false;
+      }
+      else{
+         children(root.centre);
+         children(root.right);
+         children(root.left);
+         return false;
+      }
+   }
+   
+   public static void one(Node<Stack<Integer>> root, Stack<Integer> A, Stack<Integer> B, Stack<Integer> C){
+      if (!(A.empty()) && A.peek() == 1){
+         //one(root,A,B,C);
+         B.push(A.pop());
+         root.left = new Node(A.clone(),B.clone(),C.clone());
+         A.push(B.pop());
+         C.push(A.pop());
+         root.right = new Node(A.clone(),B.clone(),C.clone());
+         A.push(C.pop());
+      }
+      else if (!(B.empty()) && B.peek() == 1){
+         //one(root,B,A,C);
+         A.push(B.pop());
+         root.left = new Node(A.clone(),B.clone(),C.clone());
+         B.push(A.pop());
+         C.push(B.pop());
+         root.right = new Node(A.clone(),B.clone(),C.clone());
+         B.push(C.pop());
+      }
+      else if (!(C.empty()) && C.peek() == 1){
+         //one(root,C,A,B);
+         B.push(C.pop());
+         root.left = new Node(A.clone(),B.clone(),C.clone());
+         C.push(B.pop());
+         A.push(C.pop());
+         root.right = new Node(A.clone(),B.clone(),C.clone());
+         C.push(A.pop());
+      }
+
+   }
+   
+   public static void two(Node<Stack<Integer>> root, Stack<Integer> A, Stack<Integer> B, Stack<Integer> C){
+      if (!(A.empty()) && A.peek() > 1){
          if (B.empty() || B.peek() > A.peek()){
             B.push(A.pop());
             root.centre = new Node(A.clone(),B.clone(),C.clone());
@@ -32,7 +87,7 @@ public class HanoiTree{
          }
       }
       
-      else if (B.peek() > 1){
+      else if (!(B.empty()) && B.peek() > 1){
          if (C.empty() || C.peek() > B.peek()){
             C.push(B.pop());
             root.centre = new Node(A.clone(),B.clone(),C.clone());
@@ -45,7 +100,7 @@ public class HanoiTree{
          }
       }
       
-      else if (C.peek() > 1){
+      else if (!(C.empty()) && C.peek() > 1){
          if (A.empty() || A.peek() > C.peek()){
             A.push(C.pop());
             root.centre = new Node(A.clone(),B.clone(),C.clone());
@@ -59,39 +114,6 @@ public class HanoiTree{
       }
       
    }
-   
-   public static void one(Node<Stack<Integer>> root, Stack<Integer> A, Stack<Integer> B, Stack<Integer> C){
-      if (A.peek() == 1){
-         //one(root,A,B,C);
-         B.push(A.pop());
-         root.left = new Node(A.clone(),B.clone(),C.clone());
-         A.push(B.pop());
-         C.push(A.pop());
-         root.right = new Node(A.clone(),B.clone(),C.clone());
-         A.push(C.pop());
-      }
-      else if (B.peek() == 1){
-         //one(root,B,A,C);
-         A.push(B.pop());
-         root.left = new Node(A.clone(),B.clone(),C.clone());
-         B.push(A.pop());
-         C.push(B.pop());
-         root.right = new Node(A.clone(),B.clone(),C.clone());
-         B.push(C.pop());
-      }
-      else if (C.peek() == 1){
-         //one(root,C,A,B);
-         B.push(C.pop());
-         root.left = new Node(A.clone(),B.clone(),C.clone());
-         C.push(B.pop());
-         A.push(C.pop());
-         root.right = new Node(A.clone(),B.clone(),C.clone());
-         C.push(A.pop());
-      }
-
-   }
-   
-   
 
    public static void constructTree(){
       //Node<Stack<Integer>> root = new Node(
