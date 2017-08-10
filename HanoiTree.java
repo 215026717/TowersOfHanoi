@@ -1,4 +1,6 @@
 import java.util.*;
+import java.io.*;
+import java.lang.*;
 public class HanoiTree{
    static class Node<E>{
       E A,B,C;
@@ -16,28 +18,33 @@ public class HanoiTree{
    public static boolean switcher;
    
    public static boolean children(Node<Stack<Integer>> root){
+      if (root == null){
+         return false;
+      }
       Stack<Integer> A = root.A;
       Stack<Integer> B = root.B;
       Stack<Integer> C = root.C;
       //one(root,A,B,C);
       //two(root,A,B,C);
-      System.out.println(switcher);
+      if (!root.C.empty())
+         System.out.println(root.C.peek());
+      
       switcher = !switcher;
       one(root,A,B,C);
       two(root,A,B,C);
-      if (root.A.empty() && root.B.empty()){
+      if (root.A.empty() && root.B.empty() || root.C.empty() && root.A.empty()){
          return true;
       }
       else if (switcher){
          children(root.left);
-         children(root.right);
-         children(root.centre);
+         //children(root.right);
+         //children(root.centre);
          return false;
       }
       else{
          children(root.centre);
          children(root.right);
-         children(root.left);
+         //children(root.left);
          return false;
       }
    }
