@@ -1,6 +1,4 @@
 import java.util.*;
-//import java.io.*;
-//import java.lang.*;
 public class HanoiTree{
    static class Node<E>{
 	  E A,B,C;
@@ -34,21 +32,16 @@ private static Scanner input;
 	      
 	      else if (X.A.empty() && X.B.empty()){
 	         Goal = X;
-	         //display(X);
 	         DFpath.push(X);
 	         return true;
 	      }
 	      
 	      else{
-	         //DFpath.push(X);
-	         //DFopenClosed.push(X);
 	         one(X);
 	         if (X.right != null)
 	            DFopenClosed.push(X.right);
 	         if (X.left != null)
 	            DFopenClosed.push(X.left);
-	        //if (!DFopenClosed.empty())
-	        //return DF(DFopenClosed.pop());
 	         if (DF(X.left)){
 	        	length++;
 	            DFpath.push(X);
@@ -61,8 +54,6 @@ private static Scanner input;
 	         }
 	         return false;
 	      }
-	        //System.out.println(tester);
-	        //return false;
 	   }
 
    
@@ -162,7 +153,6 @@ private static Scanner input;
       
          if (!B.empty()){
             if (B.peek() == 1){
-            //one(root,B,A,C);
                A.push(B.pop());
                tempC.push(tempB.pop());
                if (search(DFopenClosed,A,B,C) && search(DFopenClosed,tempA,tempB,tempC)){
@@ -282,14 +272,7 @@ private static Scanner input;
 	   }
    }
 
-   /*public boolean insert(List element){
-      if (root == null){
-         root = new TreeNode(element);
-      }
-   }*/
-
    public static void main(String[] arg){
-      //if (tempB.equals(temp))
 	  String search;
 	   
 	  input = new Scanner(System.in);	
@@ -319,4 +302,4 @@ private static Scanner input;
 		System.out.println("Invalid Search! The Program terminated!");
 	  }
    }
-}//Must return length of path from start state (root node) to goal state
+}
