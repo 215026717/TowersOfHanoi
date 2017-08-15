@@ -250,12 +250,12 @@ public class HanoiTree{
    
    }
    
-   public static void displayDFpath(){
+   public static void displayPath(){
       while (!DFpath.empty()){
-         try{
+         /*try{
             Thread.sleep(1000);
          } 
-         catch(InterruptedException ie){}
+         catch(InterruptedException ie){}*/
          display(DFpath.peek());
          DFpath.pop();
       }
@@ -263,12 +263,17 @@ public class HanoiTree{
 
    public static void main(String[] arg){
       String search;
-      
+      if (arg.length == 2){
+    	  disks = Integer.parseInt(arg[0]);
+    	  search = arg[1];
+      }
+      else {
       input = new Scanner(System.in);	
-      System.out.println("This is a program that solves the famous Towers Of Hanoi problem. You (the user) have a choice between two distinct searches; breadth first search and depth first search. You must also specify the number of disks (3+) you wish to solve for. If that wasn't clear enough, it'll make sense later on.\n\n\n\n\n Enter the number of disks you wish to solve for (3-):");
+      System.out.println("This is a program that solves the famous Towers Of Hanoi problem.\nYou (the user) have a choice between two distinct searches; breadth first search and depth first search. \nYou must also specify the number of disks (3+) you wish to solve for. \nIf that wasn't clear enough, it'll make sense later on.\n\n\n\n Enter the number of disks you wish to solve for (3-):");
       disks = input.nextInt();
       System.out.println("Enter the search you with to use (B)readth first or (D)epth first?:");
       search = input.next();
+      }
       Stack<Integer> A = new Stack<>();
       for (int i = disks; i > 0; i--){
          A.push(i);
@@ -278,13 +283,13 @@ public class HanoiTree{
       if (search.equals("D") || search.equals("d")){
          System.out.println("The Solution path using the Depth first search is:");
          DF(root);
-         displayDFpath();
+         displayPath();
          System.out.println("The length from start state to the goal state is " + length);
       }
       else if (search.equals("B") || search.equals("b")){
          System.out.println("The Solution path using the Breadth first search is:");
          BF(root);
-         displayDFpath();
+         displayPath();
          System.out.println("The length from start state to the goal state is " + length);
       }
       else{
